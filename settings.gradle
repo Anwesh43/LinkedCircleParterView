@@ -1,0 +1,3 @@
+include ':circleparterview'
+include ':app'
+rootProject.name = "LinkedCircleParterView"
