@@ -32,3 +32,31 @@ fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
 fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale(i, n)) * n
 fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
+
+fun Canvas.drawCircleParter(scale : Float, w : Float, h : Float, paint : Paint) {
+    val size : Float = Math.min(w, h) / sizeFactor
+    val sf : Float = scale.sinify()
+    val sf2 : Float = sf.divideScale(arcs, parts)
+    val gap : Float = deg / arcs
+    val rot : Float = fullDeg / arcs
+    save()
+    translate(w / 2, h / 2)
+    rotate(90f * sf2)
+    for (j in 0..(arcs - 1)) {
+        val sfj : Float = sf.divideScale(j, arcs)
+        save()
+        rotate(rot * j)
+        drawArc(RectF(-size, -size, size, size), -gap * sfj * 0.5f, gap * sfj, false, paint)
+        restore()
+    }
+    restore()
+}
+
+fun Canvas.drawCPNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    paint.color = colors[i]
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.strokeWidth = Math.min(w, h) / strokeFactor
+    drawCircleParter(scale, w, h, paint)
+}
