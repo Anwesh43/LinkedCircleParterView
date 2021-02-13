@@ -43,10 +43,10 @@ fun Canvas.drawCircleParter(scale : Float, w : Float, h : Float, paint : Paint) 
     translate(w / 2, h / 2)
     rotate(90f * sf2)
     for (j in 0..(arcs - 1)) {
-        val sfj : Float = sf.divideScale(j, arcs)
+        val sfj : Float = sf.divideScale(j, parts)
         save()
         rotate(rot * j)
-        drawArc(RectF(-size, -size, size, size), -gap * sfj * 0.5f, gap * sfj, false, paint)
+        drawArc(RectF(-size, -size, size, size), -gap / 2, gap * sfj, false, paint)
         restore()
     }
     restore()
@@ -58,6 +58,7 @@ fun Canvas.drawCPNode(i : Int, scale : Float, paint : Paint) {
     paint.color = colors[i]
     paint.strokeCap = Paint.Cap.ROUND
     paint.strokeWidth = Math.min(w, h) / strokeFactor
+    paint.style = Paint.Style.STROKE
     drawCircleParter(scale, w, h, paint)
 }
 
