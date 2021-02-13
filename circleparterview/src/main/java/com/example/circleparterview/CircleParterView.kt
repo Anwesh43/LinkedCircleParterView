@@ -187,4 +187,27 @@ class CircleParterView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : CircleParterView) {
+
+        private val animator : Animator = Animator(view)
+        private val cp : CircleParter = CircleParter(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            cp.draw(canvas, paint)
+            animator.animate {
+                cp.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            cp.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
