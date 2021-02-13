@@ -212,4 +212,13 @@ class CircleParterView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CircleParterView {
+            val view : CircleParterView = CircleParterView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
