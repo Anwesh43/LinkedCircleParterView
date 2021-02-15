@@ -40,8 +40,8 @@ fun  Canvas.drawFourRotLineArc(scale : Float, w : Float, h : Float, paint : Pain
     translate(w / 2, h / 2)
     for (j in 0..(parts -1)) {
         val sfj : Float = sf.divideScale(j, parts)
-        val sfj1 : Float = sf.divideScale(0, divs)
-        val sfj2 : Float = sf.divideScale(1, divs)
+        val sfj1 : Float = sfj.divideScale(0, divs)
+        val sfj2 : Float = sfj.divideScale(1, divs)
         save()
         rotate((360f / parts) * j)
         for (k in 0..1) {
@@ -85,7 +85,7 @@ class FourRotLineArcView(ctx : Context) : View(ctx) {
     data class State(var scale : Float = 0f, var dir : Float = 0f, var prevScale : Float = 0f) {
 
         fun update(cb : (Float) -> Unit) {
-            scale += prevScale * dir
+            scale += scGap * dir
             if (Math.abs(scale - prevScale) > 1) {
                 scale = prevScale + dir
                 dir = 0f
