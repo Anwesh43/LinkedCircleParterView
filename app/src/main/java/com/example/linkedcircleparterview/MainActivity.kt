@@ -4,11 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import com.example.circleparterview.CircleParterView
+import com.example.fourrotlinearcview.FourRotLineArcView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CircleParterView.create(this)
+        FourRotLineArcView.create(this)
         fullScreen()
     }
 }
