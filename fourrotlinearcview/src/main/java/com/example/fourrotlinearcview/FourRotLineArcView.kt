@@ -25,6 +25,8 @@ val strokeFactor : Float = 90f
 val sizeFactor : Float = 3.2f
 val delay : Long = 20
 val rot : Float = 90f
+val backColor : Int = Color.parseColor("#BDBDBD")
+
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
@@ -187,6 +189,29 @@ class FourRotLineArcView(ctx : Context) : View(ctx) {
 
         fun startUpdating(cb : () -> Unit) {
             curr.startUpdating(cb)
+        }
+    }
+
+    data class Renderer(var view : FourRotLineArcView) {
+
+        private val animator : Animator = Animator(view)
+        private val frl : FourRotLineArc = FourRotLineArc(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            frl.draw(canvas, paint)
+            animator.animate {
+                frl.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            frl.startUpdating {
+                animator.start()
+            }
         }
     }
 }
