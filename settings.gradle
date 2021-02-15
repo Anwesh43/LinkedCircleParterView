@@ -1,3 +1,4 @@
+include ':fourrotlinearcview'
 include ':circleparterview'
 include ':app'
 rootProject.name = "LinkedCircleParterView"
