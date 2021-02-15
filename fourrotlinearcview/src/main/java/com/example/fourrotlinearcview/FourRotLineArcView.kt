@@ -216,4 +216,13 @@ class FourRotLineArcView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : FourRotLineArcView {
+            val view : FourRotLineArcView = FourRotLineArcView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
